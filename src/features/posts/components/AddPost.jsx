@@ -1,10 +1,21 @@
+import { useDispatch } from 'react-redux'
+import { nanoid } from '@reduxjs/toolkit'
+import { postAdded } from '../postsSlice'
+
 const AddPost = () => {
+  const dispatch = useDispatch()
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
     const elem = e.currentTarget
-    console.log(elem.title.value)
-    console.log(elem.content.value)
+    const newPost = {
+      id: nanoid(),
+      title: elem.title.value,
+      content: elem.content.value,
+    }
+
+    dispatch(postAdded(newPost))
 
     e.currentTarget.reset()
   }
