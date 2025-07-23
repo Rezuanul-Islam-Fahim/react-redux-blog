@@ -1,0 +1,10 @@
+// jsconfig.json (for JS projects)
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    }
+  },
+  "include": ["src"]
+}
