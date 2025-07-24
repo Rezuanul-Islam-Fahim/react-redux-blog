@@ -1,1 +1,1 @@
-export { usersReducer } from './usersSlice'
+export { usersReducer, fetchAllUsers, fetchUserById } from './usersSlice'

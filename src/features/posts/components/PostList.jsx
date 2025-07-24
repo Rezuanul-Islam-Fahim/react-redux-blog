@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router'
 import { selectAllPosts } from '../postsSlice'
+import PostAuthor from './PostAuthor'
 
 const PostList = () => {
   const posts = useSelector(selectAllPosts)
@@ -20,11 +21,14 @@ const PostList = () => {
           className="border border-gray-300  border-solid p-5 rounded-lg my-4"
         >
           <Link to={`/posts/${post.id}`}>
-            <h4 className="text-2xl font-semibold mb-3 link link-primary link-hover">
+            <h4 className="text-2xl font-semibold link link-primary link-hover">
               {post.title}
             </h4>
           </Link>
-          <p>{getPostContentStr(post.content)}</p>
+          <div className="flex flex-row mb-4">
+            <PostAuthor userId={post.userId} />
+          </div>
+          <p className="text-lg">{getPostContentStr(post.content)}</p>
         </div>
       ))}
     </>

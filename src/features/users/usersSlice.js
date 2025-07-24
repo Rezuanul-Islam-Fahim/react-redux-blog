@@ -13,3 +13,6 @@ const usersSlice = createSlice({
 })
 
 export const usersReducer = usersSlice.reducer
+
+export const fetchAllUsers = state => state.users
+export const fetchUserById = (state, id) => state.users.find(e => e.id === id)
