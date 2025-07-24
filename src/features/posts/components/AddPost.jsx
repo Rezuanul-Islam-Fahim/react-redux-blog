@@ -5,17 +5,14 @@ import { postAdded } from '../postsSlice'
 const AddPost = () => {
   const dispatch = useDispatch()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault()
 
-    const elem = e.currentTarget
-    const newPost = {
-      id: nanoid(),
-      title: elem.title.value,
-      content: elem.content.value,
-    }
+    const { elements } = e.currentTarget
+    const title = elements.title.value
+    const content = elements.content.value
 
-    dispatch(postAdded(newPost))
+    dispatch(postAdded(title, content))
 
     e.currentTarget.reset()
   }
