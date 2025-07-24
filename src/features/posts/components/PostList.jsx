@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router'
 
 const PostList = () => {
   const posts = useSelector((state) => state.posts)
@@ -11,7 +12,9 @@ const PostList = () => {
           key={post.id}
           className="border border-gray-300  border-solid p-5 rounded-lg my-4"
         >
-          <h4 className="text-2xl font-semibold mb-3">{post.title}</h4>
+          <Link to={`/posts/${post.id}`}>
+            <h4 className="text-2xl font-semibold mb-3">{post.title}</h4>
+          </Link>
           <p>{post.content}</p>
         </div>
       ))}
