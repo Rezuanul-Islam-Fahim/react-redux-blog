@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { selectPostById } from '../postsSlice'
 import PostAuthor from '../components/PostAuthor'
 import TimeAgo from '@/shared/components/TimeAgo'
+import ReactionButtons from '../components/ReactionButtons'
 
 const PostDetailPage = () => {
   const { id } = useParams()
@@ -17,6 +18,7 @@ const PostDetailPage = () => {
           <TimeAgo timestamp={post.date} />
         </div>
         <p className="text-lg">{post.content}</p>
+        <ReactionButtons postId={post.id} />
         <Link to={`/edit-post/${id}`} className="btn btn-neutral mt-5">
           Edit Post
         </Link>
