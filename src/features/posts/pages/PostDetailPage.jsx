@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { selectPostById } from '../postsSlice'
 import PostAuthor from '../components/PostAuthor'
+import TimeAgo from '@/shared/components/TimeAgo'
 
 const PostDetailPage = () => {
   const { id } = useParams()
@@ -13,6 +14,7 @@ const PostDetailPage = () => {
         <h4 className="text-2xl font-semibold">{post.title}</h4>
         <div className="flex flex-row mb-4">
           <PostAuthor userId={post.userId} />
+          <TimeAgo timestamp={post.date} />
         </div>
         <p className="text-lg">{post.content}</p>
         <Link to={`/edit-post/${id}`} className="btn btn-neutral mt-5">

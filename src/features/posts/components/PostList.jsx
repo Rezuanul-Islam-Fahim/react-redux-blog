@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router'
 import { selectAllPosts } from '../postsSlice'
 import PostAuthor from './PostAuthor'
+import TimeAgo from '@/shared/components/TimeAgo'
 
 const PostList = () => {
   const posts = useSelector(selectAllPosts)
@@ -27,6 +28,7 @@ const PostList = () => {
           </Link>
           <div className="flex flex-row mb-4">
             <PostAuthor userId={post.userId} />
+            <TimeAgo timestamp={post.date} />
           </div>
           <p className="text-lg">{getPostContentStr(post.content)}</p>
         </div>
