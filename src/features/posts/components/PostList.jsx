@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { selectAllPosts } from '../postsSlice'
 import PostAuthor from './PostAuthor'
 import TimeAgo from '@/shared/components/TimeAgo'
+import ReactionButtons from './ReactionButtons'
 
 const PostList = () => {
   const posts = useSelector(selectAllPosts)
@@ -33,6 +34,7 @@ const PostList = () => {
             <TimeAgo timestamp={post.date} />
           </div>
           <p className="text-lg">{getPostContentStr(post.content)}</p>
+          <ReactionButtons postId={post.id} />
         </div>
       ))}
     </>
