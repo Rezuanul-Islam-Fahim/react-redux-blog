@@ -4,6 +4,12 @@ import { Link } from 'react-router'
 const PostList = () => {
   const posts = useSelector((state) => state.posts)
 
+  const getPostContentStr = (s) => {
+    const subStr = s.substring(0, 180)
+
+    return subStr.length < s.length ? subStr + '...' : s
+  }
+
   return (
     <>
       <h3 className="text-4xl font-semibold mb-3 mt-10">Posts</h3>
@@ -15,7 +21,7 @@ const PostList = () => {
           <Link to={`/posts/${post.id}`}>
             <h4 className="text-2xl font-semibold mb-3">{post.title}</h4>
           </Link>
-          <p>{post.content}</p>
+          <p>{getPostContentStr(post.content)}</p>
         </div>
       ))}
     </>
