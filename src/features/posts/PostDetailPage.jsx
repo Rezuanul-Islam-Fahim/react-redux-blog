@@ -1,7 +1,18 @@
-import React from 'react'
+import { useParams } from 'react-router'
+import { useSelector } from 'react-redux'
 
 const PostDetailPage = () => {
-  return <div>PostDetailPage</div>
+  const { id } = useParams()
+  const post = useSelector(state => state.posts.find(e => e.id == id))
+
+  return (
+    <div className="container mx-auto py-10">
+      <div className="border border-gray-300 max-w-3xl mx-auto border-solid p-5 rounded-lg my-4">
+        <h4 className="text-2xl font-semibold mb-3">{post.title}</h4>
+        <p>{post.content}</p>
+      </div>
+    </div>
+  )
 }
 
 export default PostDetailPage
