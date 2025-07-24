@@ -7,6 +7,8 @@ import TimeAgo from '@/shared/components/TimeAgo'
 const PostList = () => {
   const posts = useSelector(selectAllPosts)
 
+  const sortedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
+
   const getPostContentStr = s => {
     const subStr = s.substring(0, 180)
 
@@ -16,7 +18,7 @@ const PostList = () => {
   return (
     <>
       <h3 className="text-4xl font-semibold mb-3 mt-10">Posts</h3>
-      {posts.map(post => (
+      {sortedPosts.map(post => (
         <div
           key={post.id}
           className="border border-gray-300  border-solid p-5 rounded-lg my-4"
