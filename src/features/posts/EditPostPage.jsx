@@ -1,8 +1,11 @@
-import { useSelector } from 'react-redux'
-import { useParams } from 'react-router'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams, useNavigate } from 'react-router'
+import { postUpdated } from './postsSlice'
 
 const EditPostPage = () => {
   const { id } = useParams()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const post = useSelector(state => state.posts.find(e => e.id === id))
 
   if (!post) {
@@ -17,7 +20,18 @@ const EditPostPage = () => {
     )
   }
 
-  const handleSubmit = () => {}
+  const handleSubmit = e => {
+    e.preventDefault()
+
+    const { elements } = e.currentTarget
+    const title = elements.title.value
+    const content = elements.content.value
+
+    if (title && content) {
+      dispatch(postUpdated({ id: id, title, content }))
+      navigate(`/posts/${id}`)
+    }
+  }
 
   return (
     <div className="container mx-auto py-10">
@@ -33,6 +47,7 @@ const EditPostPage = () => {
               type="text"
               className="input input-bordered"
               placeholder="Post Title"
+              defaultValue={post.title}
               required
             />
           </div>
@@ -44,6 +59,7 @@ const EditPostPage = () => {
               name="content"
               className="textarea textarea-bordered h-32"
               placeholder="Write you description here..."
+              defaultValue={post.content}
               required
             />
           </div>
