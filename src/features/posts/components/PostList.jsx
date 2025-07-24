@@ -20,7 +20,9 @@ const PostList = () => {
           className="border border-gray-300  border-solid p-5 rounded-lg my-4"
         >
           <Link to={`/posts/${post.id}`}>
-            <h4 className="text-2xl font-semibold mb-3">{post.title}</h4>
+            <h4 className="text-2xl font-semibold mb-3 link link-primary link-hover">
+              {post.title}
+            </h4>
           </Link>
           <p>{getPostContentStr(post.content)}</p>
         </div>
