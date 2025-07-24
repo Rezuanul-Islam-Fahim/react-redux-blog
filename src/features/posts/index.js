@@ -1,4 +1,4 @@
-export { default as PostsPage } from './PostsPage'
-export { default as PostDetailPage } from './PostDetailPage'
-export { default as EditPostPage } from './EditPostPage'
+export { default as PostsPage } from './pages/PostsPage'
+export { default as PostDetailPage } from './pages/PostDetailPage'
+export { default as EditPostPage } from './pages/EditPostPage'
 export { postsReducer } from './postsSlice'

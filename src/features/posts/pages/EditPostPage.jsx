@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useNavigate } from 'react-router'
-import { postUpdated, selectPostById } from './postsSlice'
+import { postUpdated, selectPostById } from '../postsSlice'
 
 const EditPostPage = () => {
   const { id } = useParams()

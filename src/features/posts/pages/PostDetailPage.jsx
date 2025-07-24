@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router'
 import { useSelector } from 'react-redux'
-import { selectPostById } from './postsSlice'
+import { selectPostById } from '../postsSlice'
 
 const PostDetailPage = () => {
   const { id } = useParams()
