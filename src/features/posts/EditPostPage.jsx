@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useNavigate } from 'react-router'
-import { postUpdated } from './postsSlice'
+import { postUpdated, selectPostById } from './postsSlice'
 
 const EditPostPage = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const post = useSelector(state => state.posts.find(e => e.id === id))
+  const post = useSelector(state => selectPostById(state, id))
 
   if (!post) {
     return (

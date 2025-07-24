@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router'
+import { selectAllPosts } from '../postsSlice'
 
 const PostList = () => {
-  const posts = useSelector((state) => state.posts)
+  const posts = useSelector(selectAllPosts)
 
-  const getPostContentStr = (s) => {
+  const getPostContentStr = s => {
     const subStr = s.substring(0, 180)
 
     return subStr.length < s.length ? subStr + '...' : s
@@ -13,7 +14,7 @@ const PostList = () => {
   return (
     <>
       <h3 className="text-4xl font-semibold mb-3 mt-10">Posts</h3>
-      {posts.map((post) => (
+      {posts.map(post => (
         <div
           key={post.id}
           className="border border-gray-300  border-solid p-5 rounded-lg my-4"

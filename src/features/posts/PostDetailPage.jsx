@@ -1,9 +1,10 @@
 import { Link, useParams } from 'react-router'
 import { useSelector } from 'react-redux'
+import { selectPostById } from './postsSlice'
 
 const PostDetailPage = () => {
   const { id } = useParams()
-  const post = useSelector(state => state.posts.find(e => e.id == id))
+  const post = useSelector(state => selectPostById(state, id))
 
   return (
     <div className="container mx-auto py-10">

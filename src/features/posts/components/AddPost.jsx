@@ -1,5 +1,4 @@
 import { useDispatch } from 'react-redux'
-import { nanoid } from '@reduxjs/toolkit'
 import { postAdded } from '../postsSlice'
 
 const AddPost = () => {
