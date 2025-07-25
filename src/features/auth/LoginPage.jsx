@@ -1,11 +1,20 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchAllUsers } from '@/features/users'
+import { userLoggedIn } from './authSlice'
+import { useNavigate } from 'react-router'
 
 const LoginPage = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const users = useSelector(fetchAllUsers)
 
-  const handleLogin = e => {}
+  const handleLogin = e => {
+    e.preventDefault()
+
+    const userId = e.currentTarget.elements.user.value
+    dispatch(userLoggedIn(userId))
+    navigate('/posts')
+  }
 
   return (
     <div className="container max-w-sm mx-auto text-center justify-center py-10">

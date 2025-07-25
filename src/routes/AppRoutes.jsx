@@ -8,6 +8,7 @@ const AppRoutes = () => {
     <Routes>
       <Route element={<MainLayout />}>
         <Route index element={<LoginPage />} />
+        <Route path="/posts" element={<PostsPage />} />
         <Route path="/posts/:id" element={<PostDetailPage />} />
         <Route path="/edit-post/:id" element={<EditPostPage />} />
       </Route>
