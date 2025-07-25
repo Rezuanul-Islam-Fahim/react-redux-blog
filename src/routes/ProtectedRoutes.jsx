@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router'
+import { selectLoggedUserId } from '@/features/auth'
 
 const ProtectedRoutes = ({ children }) => {
-  const user = useSelector(state => state.auth.username)
+  const user = useSelector(selectLoggedUserId)
 
   if (!user) {
     return <Navigate to="/" replace />

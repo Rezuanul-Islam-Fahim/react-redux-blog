@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { postAdded } from '../postsSlice'
-import { fetchAllUsers } from '@/features/users'
+import { selectLoggedUserId } from '@/features/auth'
 
 const AddPost = () => {
-  const users = useSelector(fetchAllUsers)
   const dispatch = useDispatch()
+  const userId = useSelector(selectLoggedUserId)
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -12,7 +12,6 @@ const AddPost = () => {
     const { elements } = e.currentTarget
     const title = elements.title.value
     const content = elements.content.value
-    const userId = elements.user.value
 
     dispatch(postAdded(title, content, userId))
 
@@ -45,26 +44,6 @@ const AddPost = () => {
             placeholder="Write you description here..."
             required
           />
-        </div>
-        <div className="form-control mb-5">
-          <label className="label">
-            <span className="label-text">User</span>
-          </label>
-          <select
-            defaultValue=""
-            name="user"
-            className="select select-bordered w-full max-w-xs"
-            required
-          >
-            <option value="" disabled>
-              -- Select an option --
-            </option>
-            {users.map(user => (
-              <option key={user.id} value={user.id}>
-                {user.name}
-              </option>
-            ))}
-          </select>
         </div>
         <div className="card-actions">
           <button className="btn btn-primary" type="submit">
