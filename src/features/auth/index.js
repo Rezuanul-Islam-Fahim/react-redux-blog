@@ -1,1 +1,1 @@
-export { authReducer, selectLoggedUserId } from './authSlice'
+export { authReducer, selectLoggedUserId, userLoggedOut } from './authSlice'
