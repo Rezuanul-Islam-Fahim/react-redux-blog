@@ -4,7 +4,7 @@ const NavBar = () => {
   return (
     <div className="navbar bg-primary text-primary-content">
       <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-xl">
+        <Link to="/posts" className="btn btn-ghost text-xl">
           React Redux Blog
         </Link>
       </div>
