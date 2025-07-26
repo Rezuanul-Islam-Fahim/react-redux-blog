@@ -4,10 +4,12 @@ import { selectPostById } from '../postsSlice'
 import PostAuthor from '../components/PostAuthor'
 import TimeAgo from '@/shared/components/TimeAgo'
 import ReactionButtons from '../components/ReactionButtons'
+import { selectLoggedUserId } from '@/features/auth'
 
 const PostDetailPage = () => {
   const { id } = useParams()
   const post = useSelector(state => selectPostById(state, id))
+  const loggedUserId = useSelector(selectLoggedUserId)
 
   return (
     <div className="container mx-auto py-10">
@@ -19,9 +21,11 @@ const PostDetailPage = () => {
         </div>
         <p className="text-lg">{post.content}</p>
         <ReactionButtons postId={post.id} />
-        <Link to={`/edit-post/${id}`} className="btn btn-neutral mt-5">
-          Edit Post
-        </Link>
+        {loggedUserId === post.userId && (
+          <Link to={`/edit-post/${id}`} className="btn btn-neutral mt-5">
+            Edit Post
+          </Link>
+        )}
       </div>
     </div>
   )
