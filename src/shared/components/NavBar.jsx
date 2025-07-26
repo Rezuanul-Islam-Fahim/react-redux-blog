@@ -13,7 +13,6 @@ const NavBar = () => {
   if (!!loggedUser) {
     const handleLogout = () => {
       dispatch(userLoggedOut())
-      navigate('/')
     }
 
     navMenu = (
