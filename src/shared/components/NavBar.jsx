@@ -1,11 +1,10 @@
 import { selectUser } from '@/features/users'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router'
+import { Link } from 'react-router'
 import { CircleUserRound } from 'lucide-react'
 import { userLoggedOut } from '@/features/auth'
 
 const NavBar = () => {
-  const navigate = useNavigate()
   const dispatch = useDispatch()
   const loggedUser = useSelector(selectUser)
   let navMenu = null
