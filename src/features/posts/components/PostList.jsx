@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router'
 import { selectAllPosts } from '../postsSlice'
 import PostAuthor from './PostAuthor'
-import TimeAgo from '@/shared/components/TimeAgo'
+import TimeAgo from '@/features/posts/components/TimeAgo'
 import ReactionButtons from './ReactionButtons'
 
 const PostList = () => {

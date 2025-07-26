@@ -2,7 +2,7 @@ import { Link, useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { selectPostById } from '../postsSlice'
 import PostAuthor from '../components/PostAuthor'
-import TimeAgo from '@/shared/components/TimeAgo'
+import TimeAgo from '@/features/posts/components/TimeAgo'
 import ReactionButtons from '../components/ReactionButtons'
 import { selectLoggedUserId } from '@/features/auth'
 

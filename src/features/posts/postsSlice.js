@@ -1,5 +1,6 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit'
 import { sub } from 'date-fns'
+import { createSlice, nanoid } from '@reduxjs/toolkit'
+import { userLoggedOut } from '@/features/auth'
 
 const initialReactions = {
   thumbsUp: 0,
@@ -66,6 +67,9 @@ const postsSlice = createSlice({
         post.reactions[emojiName]++
       }
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(userLoggedOut, _ => [])
   },
 })
 
