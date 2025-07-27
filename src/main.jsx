@@ -3,11 +3,14 @@ import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import './styles/index.css'
 import { App, store } from './app'
+import { worker } from './api/server'
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </StrictMode>
-)
+worker.start({ onUnhandledRequest: 'bypass' }).then(_ => {
+  createRoot(document.getElementById('root')).render(
+    <StrictMode>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </StrictMode>
+  )
+})

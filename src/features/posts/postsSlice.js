@@ -1,6 +1,6 @@
-import { sub } from 'date-fns'
-import { createSlice, nanoid } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit'
 import { userLoggedOut } from '@/features/auth'
+import { client } from '@/api/client'
 
 const initialReactions = {
   thumbsUp: 0,
@@ -10,24 +10,11 @@ const initialReactions = {
   eyes: 0,
 }
 
-const initialPosts = [
-  {
-    id: '0',
-    title: 'Post 1',
-    content: 'This is post 1',
-    userId: '0',
-    date: sub(new Date(), { minutes: 10 }).toISOString(),
-    reactions: initialReactions,
-  },
-  {
-    id: '1',
-    title: 'Post 2',
-    content: 'This is post 2',
-    userId: '0',
-    date: sub(new Date(), { minutes: 5 }).toISOString(),
-    reactions: initialReactions,
-  },
-]
+const initialPosts = {
+  posts: [],
+  status: 'idle',
+  error: null,
+}
 
 const postsSlice = createSlice({
   name: 'posts',
@@ -35,7 +22,7 @@ const postsSlice = createSlice({
   reducers: {
     postAdded: {
       reducer: (state, action) => {
-        state.push(action.payload)
+        state.posts.push(action.payload)
       },
       prepare: (title, content, userId) => {
         return {
@@ -52,7 +39,7 @@ const postsSlice = createSlice({
     },
     postUpdated: (state, action) => {
       const { id, title, content } = action.payload
-      const existingItem = state.find(e => e.id === id)
+      const existingItem = state.posts.find(e => e.id === id)
 
       if (existingItem) {
         existingItem.title = title
@@ -61,7 +48,7 @@ const postsSlice = createSlice({
     },
     reactionAdded: (state, action) => {
       const { postId, emojiName } = action.payload
-      const post = state.find(e => e.id === postId)
+      const post = state.posts.find(e => e.id === postId)
 
       if (post) {
         post.reactions[emojiName]++
@@ -69,12 +56,32 @@ const postsSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(userLoggedOut, _ => [])
+    builder
+      .addCase(userLoggedOut, _ => initialPosts)
+      .addCase(fetchPosts.pending, state => {
+        state.status = 'pending'
+      })
+      .addCase(fetchPosts.fulfilled, (state, action) => {
+        state.status = 'succeeded'
+        state.posts.push(...action.payload)
+      })
+      .addCase(fetchPosts.rejected, (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message ?? 'Unknown error'
+      })
   },
 })
 
 export const postsReducer = postsSlice.reducer
 export const { postAdded, postUpdated, reactionAdded } = postsSlice.actions
 
-export const selectAllPosts = state => state.posts
-export const selectPostById = (state, id) => state.posts.find(e => e.id === id)
+export const selectAllPosts = state => state.posts.posts
+export const selectPostById = (state, id) =>
+  state.posts.posts.find(e => e.id === id)
+export const selectPostsStatus = state => state.posts.status
+export const selectPostsError = state => state.posts.error
+
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
+  const response = await client.get('/fakeApi/posts')
+  return response.data
+})
