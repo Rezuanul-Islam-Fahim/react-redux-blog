@@ -81,7 +81,19 @@ export const selectPostById = (state, id) =>
 export const selectPostsStatus = state => state.posts.status
 export const selectPostsError = state => state.posts.error
 
-export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  const response = await client.get('/fakeApi/posts')
-  return response.data
-})
+export const fetchPosts = createAsyncThunk(
+  'posts/fetchPosts',
+  async () => {
+    const response = await client.get('/fakeApi/posts')
+    return response.data
+  },
+  {
+    condition: (arg, thunkApi) => {
+      const postsStatus = selectPostsStatus(thunkApi.getState())
+
+      if (postsStatus !== 'idle') {
+        return false
+      }
+    },
+  }
+)
