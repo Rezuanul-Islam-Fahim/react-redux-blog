@@ -17,7 +17,6 @@ const PostList = () => {
   const postsStatus = useSelector(selectPostsStatus)
   const postsError = useSelector(selectPostsError)
   const posts = useSelector(selectAllPosts)
-  const sortedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
   let content = null
 
   useEffect(() => {
@@ -35,6 +34,10 @@ const PostList = () => {
   if (postsStatus === 'pending') {
     content = <LoaderIcon className="animate-spin size-10 mx-auto my-10" />
   } else if (postsStatus === 'succeeded') {
+    const sortedPosts = posts
+      .slice()
+      .sort((a, b) => b.date.localeCompare(a.date))
+
     content = (
       <>
         {sortedPosts.map(post => (
