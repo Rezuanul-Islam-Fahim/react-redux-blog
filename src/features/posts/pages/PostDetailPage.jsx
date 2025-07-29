@@ -16,7 +16,7 @@ const PostDetailPage = () => {
       <div className="border border-gray-300 max-w-3xl mx-auto border-solid p-5 rounded-lg my-4">
         <h4 className="text-2xl font-semibold">{post.title}</h4>
         <div className="flex flex-row mb-4">
-          <PostAuthor userId={post.userId} />
+          <PostAuthor userId={post.user} />
           <TimeAgo timestamp={post.date} />
         </div>
         <p className="text-lg">{post.content}</p>

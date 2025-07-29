@@ -51,7 +51,7 @@ const PostList = () => {
               </h4>
             </Link>
             <div className="flex flex-row mb-4">
-              <PostAuthor userId={post.userId} />
+              <PostAuthor userId={post.user} />
               <TimeAgo timestamp={post.date} />
             </div>
             <p className="text-lg">{getPostContentStr(post.content)}</p>
