@@ -20,23 +20,6 @@ const postsSlice = createSlice({
   name: 'posts',
   initialState: initialPosts,
   reducers: {
-    postAdded: {
-      reducer: (state, action) => {
-        state.posts.push(action.payload)
-      },
-      prepare: (title, content, userId) => {
-        return {
-          payload: {
-            id: nanoid(),
-            title,
-            content,
-            userId,
-            date: new Date().toISOString(),
-            reactions: initialReactions,
-          },
-        }
-      },
-    },
     postUpdated: (state, action) => {
       const { id, title, content } = action.payload
       const existingItem = state.posts.find(e => e.id === id)
@@ -69,11 +52,14 @@ const postsSlice = createSlice({
         state.status = 'failed'
         state.error = action.error.message ?? 'Unknown error'
       })
+      .addCase(createPost.fulfilled, (state, action) => {
+        state.posts.push(action.payload)
+      })
   },
 })
 
 export const postsReducer = postsSlice.reducer
-export const { postAdded, postUpdated, reactionAdded } = postsSlice.actions
+export const { postUpdated, reactionAdded } = postsSlice.actions
 
 export const selectAllPosts = state => state.posts.posts
 export const selectPostById = (state, id) =>
@@ -88,12 +74,20 @@ export const fetchPosts = createAsyncThunk(
     return response.data
   },
   {
-    condition: (arg, thunkApi) => {
+    condition: (_, thunkApi) => {
       const postsStatus = selectPostsStatus(thunkApi.getState())
 
       if (postsStatus !== 'idle') {
         return false
       }
     },
+  }
+)
+
+export const createPost = createAsyncThunk(
+  'posts/createPost',
+  async newPost => {
+    const response = await client.post('/fakeApi/posts', newPost)
+    return response.data
   }
 )

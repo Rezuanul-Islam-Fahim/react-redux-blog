@@ -1,21 +1,29 @@
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { postAdded } from '../postsSlice'
+import { createPost } from '../postsSlice'
 import { selectLoggedUserId } from '@/features/auth'
 
 const AddPost = () => {
+  const [requestStatus, setRequestStatus] = useState('idle')
   const dispatch = useDispatch()
   const userId = useSelector(selectLoggedUserId)
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
 
     const { elements } = e.currentTarget
     const title = elements.title.value
     const content = elements.content.value
 
-    dispatch(postAdded(title, content, userId))
-
-    e.currentTarget.reset()
+    try {
+      setRequestStatus('pending')
+      await dispatch(createPost({ title, content, user: userId })).unwrap()
+      e.target.reset()
+    } catch (error) {
+      console.log('Error occurred', error)
+    } finally {
+      setRequestStatus('idle')
+    }
   }
 
   return (
@@ -46,7 +54,11 @@ const AddPost = () => {
           />
         </div>
         <div className="card-actions">
-          <button className="btn btn-primary" type="submit">
+          <button
+            disabled={requestStatus === 'pending'}
+            className="btn btn-primary"
+            type="submit"
+          >
             Create Post
           </button>
         </div>
