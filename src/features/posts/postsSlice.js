@@ -1,14 +1,6 @@
-import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { userLoggedOut } from '@/features/auth'
 import { client } from '@/api/client'
-
-const initialReactions = {
-  thumbsUp: 0,
-  tada: 0,
-  heart: 0,
-  rocket: 0,
-  eyes: 0,
-}
 
 const initialPosts = {
   posts: [],

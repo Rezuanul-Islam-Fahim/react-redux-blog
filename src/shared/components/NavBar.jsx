@@ -7,15 +7,34 @@ import { userLoggedOut } from '@/features/auth'
 const NavBar = () => {
   const dispatch = useDispatch()
   const loggedUser = useSelector(selectUser)
-  let navMenu = null
+  let navMenuEnd = null
+  let navMenuStart = null
 
   if (!!loggedUser) {
     const handleLogout = () => {
       dispatch(userLoggedOut())
     }
 
-    navMenu = (
-      <div className="flex-none">
+    navMenuStart = (
+      <>
+        <li>
+          <Link
+            className="text-sm font-medium text-current hover:text-current active:text-current focus:text-current"
+            to="/posts"
+          >
+            Posts
+          </Link>
+        </li>
+        <li>
+          <Link className="text-sm font-medium text-current hover:text-current active:text-current focus:text-current">
+            Users
+          </Link>
+        </li>
+      </>
+    )
+
+    navMenuEnd = (
+      <div className="navbar-end">
         <ul className="menu menu-horizontal items-center px-1">
           <li className="pointer-events-none">
             <div className="flex items-center gap-2">
@@ -38,12 +57,15 @@ const NavBar = () => {
 
   return (
     <div className="navbar bg-primary text-primary-content">
-      <div className="flex-1">
-        <Link to="/posts" className="btn btn-ghost text-xl">
-          React Redux Blog
-        </Link>
+      <div className="navbar-start">
+        <ul className="menu menu-horizontal items-center px-1">
+          <li className="pointer-events-none">
+            <p className="text-xl">React Redux Blog</p>
+          </li>
+          {navMenuStart}
+        </ul>
       </div>
-      {navMenu}
+      {navMenuEnd}
     </div>
   )
 }
