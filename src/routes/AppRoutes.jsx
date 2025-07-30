@@ -3,6 +3,7 @@ import { PostsPage, PostDetailPage, EditPostPage } from '@/features/posts'
 import MainLayout from '@/shared/layouts/MainLayout'
 import LoginPage from '@/features/auth/LoginPage'
 import ProtectedRoutes from './ProtectedRoutes'
+import { UserListPage } from '@/features/users'
 
 const AppRoutes = () => {
   return (
@@ -17,6 +18,7 @@ const AppRoutes = () => {
                 <Route path="/posts" element={<PostsPage />} />
                 <Route path="/posts/:id" element={<PostDetailPage />} />
                 <Route path="/edit-post/:id" element={<EditPostPage />} />
+                <Route path="/users" element={<UserListPage />} />
               </Routes>
             </ProtectedRoutes>
           }
