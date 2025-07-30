@@ -59,6 +59,12 @@ export const selectPostById = (state, id) =>
 export const selectPostsStatus = state => state.posts.status
 export const selectPostsError = state => state.posts.error
 
+export const selectPostsByUser = (state, userId) => {
+  const allPosts = selectAllPosts(state)
+
+  return allPosts.filter(v => v.user === userId)
+}
+
 export const fetchPosts = createAsyncThunk(
   'posts/fetchPosts',
   async () => {
