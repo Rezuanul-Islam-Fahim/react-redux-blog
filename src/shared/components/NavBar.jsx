@@ -2,7 +2,7 @@ import { selectUser } from '@/features/users'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router'
 import { CircleUserRound } from 'lucide-react'
-import { userLoggedOut } from '@/features/auth'
+import { logout } from '@/features/auth'
 
 const NavBar = () => {
   const dispatch = useDispatch()
@@ -12,7 +12,7 @@ const NavBar = () => {
 
   if (!!loggedUser) {
     const handleLogout = () => {
-      dispatch(userLoggedOut())
+      dispatch(logout())
     }
 
     navMenuStart = (

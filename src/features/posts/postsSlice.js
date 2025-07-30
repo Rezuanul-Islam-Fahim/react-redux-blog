@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { userLoggedOut } from '@/features/auth'
+import { logout } from '@/features/auth'
 import { client } from '@/api/client'
 
 const initialPosts = {
@@ -32,7 +32,7 @@ const postsSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(userLoggedOut, _ => initialPosts)
+      .addCase(logout.fulfilled, _ => initialPosts)
       .addCase(fetchPosts.pending, state => {
         state.status = 'pending'
       })

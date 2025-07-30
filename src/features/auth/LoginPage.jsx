@@ -1,18 +1,18 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchAllUsers } from '@/features/users'
-import { userLoggedIn } from './authSlice'
 import { useNavigate } from 'react-router'
+import { fetchAllUsers } from '@/features/users'
+import { login } from './authSlice'
 
 const LoginPage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const users = useSelector(fetchAllUsers)
 
-  const handleLogin = e => {
+  const handleLogin = async e => {
     e.preventDefault()
 
     const userId = e.currentTarget.elements.user.value
-    dispatch(userLoggedIn(userId))
+    await dispatch(login(userId)).unwrap()
     navigate('/posts')
   }
 
