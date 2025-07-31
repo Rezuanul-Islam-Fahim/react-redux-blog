@@ -33,6 +33,14 @@ const NavBar = () => {
             Users
           </Link>
         </li>
+        <li>
+          <Link
+            className="text-sm font-medium text-current hover:text-current active:text-current focus:text-current"
+            to="/notifications"
+          >
+            Notifications
+          </Link>
+        </li>
       </>
     )
 

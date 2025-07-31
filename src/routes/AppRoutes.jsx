@@ -4,6 +4,7 @@ import MainLayout from '@/shared/layouts/MainLayout'
 import LoginPage from '@/features/auth/LoginPage'
 import ProtectedRoutes from './ProtectedRoutes'
 import { UserListPage, UserPage } from '@/features/users'
+import NotificationsPage from '@/features/notifications'
 
 const AppRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const AppRoutes = () => {
                 <Route path="/edit-post/:id" element={<EditPostPage />} />
                 <Route path="/users" element={<UserListPage />} />
                 <Route path="/users/:id" element={<UserPage />} />
+                <Route path="/notifications" element={<NotificationsPage />} />
               </Routes>
             </ProtectedRoutes>
           }
