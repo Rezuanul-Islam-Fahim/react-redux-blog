@@ -9,5 +9,6 @@ export const store = configureStore({
     posts: postsReducer,
     users: usersReducer,
     auth: authReducer,
+    notifications: notificationsReducer,
   },
 })
