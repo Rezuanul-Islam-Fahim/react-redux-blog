@@ -1,2 +1,2 @@
-export { notificationsReducer } from './notificationsSlice'
+export { notificationsReducer, fetchNotifications } from './notificationsSlice'
 export { default } from './NotificationsPage'

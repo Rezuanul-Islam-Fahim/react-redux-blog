@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router'
 import { CircleUserRound } from 'lucide-react'
 import { logout } from '@/features/auth'
+import { fetchNotifications } from '@/features/notifications'
 
 const NavBar = () => {
   const dispatch = useDispatch()
@@ -40,6 +41,16 @@ const NavBar = () => {
           >
             Notifications
           </Link>
+        </li>
+        <li>
+          <button
+            onClick={() => {
+              dispatch(fetchNotifications())
+            }}
+            className="btn btn-accent text-sm font-medium"
+          >
+            Refresh Notifications
+          </button>
         </li>
       </>
     )

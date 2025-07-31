@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 const initialNotifications = []
 
-const fetchNotifications = createAsyncThunk(
+export const fetchNotifications = createAsyncThunk(
   'notifications/fetchNotifications',
   async (_, thunkApi) => {
     const allNotifications = selectAllNotifications(thunkApi.getState())
