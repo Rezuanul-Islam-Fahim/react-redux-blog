@@ -34,7 +34,7 @@ const notificationsSlice = createSlice({
         isNew: true,
       }))
 
-      state.notification.map(notification => {
+      state.forEach(notification => {
         notification.isNew = !notification.read
       })
 
