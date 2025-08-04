@@ -23,7 +23,7 @@ const UserPage = () => {
         {posts.map(post => (
           <li key={post.id}>
             <Link to={`/posts/${post.id}`} className="link-primary">
-              {post.name}
+              {post.title}
             </Link>
           </li>
         ))}

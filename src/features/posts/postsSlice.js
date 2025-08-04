@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
 import { logout } from '@/features/auth'
 import { client } from '@/api/client'
 
@@ -59,11 +59,10 @@ export const selectPostById = (state, id) =>
 export const selectPostsStatus = state => state.posts.status
 export const selectPostsError = state => state.posts.error
 
-export const selectPostsByUser = (state, userId) => {
-  const allPosts = selectAllPosts(state)
-
-  return allPosts.filter(v => v.user === userId)
-}
+export const selectPostsByUser = createSelector(
+  [selectAllPosts, (_, userId) => userId],
+  (posts, userId) => posts.filter(p => p.user === userId)
+)
 
 export const fetchPosts = createAsyncThunk(
   'posts/fetchPosts',
