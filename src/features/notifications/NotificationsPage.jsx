@@ -17,15 +17,12 @@ const NotificationsPage = () => {
   })
 
   return (
-    <section className="max-w-3xl mx-auto mt-6 space-y-4 px-4">
+    <section className="max-w-3xl mx-auto mt-6 px-4">
       <h3 className="text-4xl font-semibold mb-8">Notifications</h3>
       {notifications.map(notification => {
-        const notificationClassname = classnames(
-          'p-4',
-          'rounded-lg',
-          'shadow',
-          { 'bg-blue-100': notification.isNew }
-        )
+        const notificationClassname = classnames('p-4', 'border', {
+          'bg-blue-100': notification.isNew,
+        })
 
         return (
           <div key={notification.id} className={notificationClassname}>
