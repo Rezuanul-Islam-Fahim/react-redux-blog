@@ -1,8 +1,9 @@
-import React from 'react'
 import { Link } from 'react-router'
 import TimeAgo from '@/features/posts/components/TimeAgo'
 import PostAuthor from './PostAuthor'
 import ReactionButtons from './ReactionButtons'
+import { selectPostById } from '../postsSlice'
+import { useSelector } from 'react-redux'
 
 const getPostContentStr = s => {
   const subStr = s.substring(0, 180)
@@ -10,7 +11,9 @@ const getPostContentStr = s => {
   return subStr.length < s.length ? subStr + '...' : s
 }
 
-const PostItem = React.memo(({ post }) => {
+const PostItem = ({ postId }) => {
+  const post = useSelector(state => selectPostById(state, postId))
+
   return (
     <div className="border border-gray-300  border-solid p-5 rounded-lg my-4">
       <Link to={`/posts/${post.id}`}>
@@ -26,6 +29,6 @@ const PostItem = React.memo(({ post }) => {
       <ReactionButtons postId={post.id} />
     </div>
   )
-})
+}
 
 export default PostItem

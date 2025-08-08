@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { LoaderIcon } from 'lucide-react'
 import {
   fetchPosts,
-  selectAllPosts,
+  selectPostIds,
   selectPostsError,
   selectPostsStatus,
 } from '../postsSlice'
@@ -13,7 +13,7 @@ const PostList = () => {
   const dispatch = useDispatch()
   const postsStatus = useSelector(selectPostsStatus)
   const postsError = useSelector(selectPostsError)
-  const posts = useSelector(selectAllPosts)
+  const orderedPostIds = useSelector(selectPostIds)
   let content = null
 
   useEffect(() => {
@@ -25,14 +25,10 @@ const PostList = () => {
   if (postsStatus === 'pending') {
     content = <LoaderIcon className="animate-spin size-10 mx-auto my-10" />
   } else if (postsStatus === 'succeeded') {
-    const sortedPosts = posts
-      .slice()
-      .sort((a, b) => b.date.localeCompare(a.date))
-
     content = (
       <>
-        {sortedPosts.map(post => (
-          <PostItem key={post.id} post={post} />
+        {orderedPostIds.map(id => (
+          <PostItem key={id} postId={id} />
         ))}
       </>
     )
