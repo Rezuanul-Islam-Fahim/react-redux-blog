@@ -21,7 +21,7 @@ const PostDetailPage = () => {
         </div>
         <p className="text-lg">{post.content}</p>
         <ReactionButtons postId={post.id} />
-        {loggedUserId === post.userId && (
+        {loggedUserId === post.user && (
           <Link to={`/edit-post/${id}`} className="btn btn-neutral mt-5">
             Edit Post
           </Link>

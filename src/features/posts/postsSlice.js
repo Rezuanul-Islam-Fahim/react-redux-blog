@@ -22,12 +22,7 @@ const postsSlice = createSlice({
   reducers: {
     postUpdated: (state, action) => {
       const { id, title, content } = action.payload
-      const existingItem = state.entities[id]
-
-      if (existingItem) {
-        existingItem.title = title
-        existingItem.content = content
-      }
+      postsAdapter.updateOne(state, {id, changes: {title, content}})
     },
     reactionAdded: (state, action) => {
       const { postId, emojiName } = action.payload
