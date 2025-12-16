@@ -92,3 +92,21 @@ export const createPost = createAsyncThunk(
     return response.data
   }
 )
+
+export const addPostsListener = (startAppListening) => {
+  startAppListening({
+    actionCreator: createPost.fulfilled,
+    effect: async (action, listenerApi) => {
+      const { toast } = await import('react-tiny-toast')
+
+      const toastId = toast.show('New post added!', {
+        position: 'bottom-right',
+        variant: 'success',
+        pause: true,
+      })
+
+      await listenerApi.delay(5000)
+      toast.remove(toastId)
+    }
+  })
+}
