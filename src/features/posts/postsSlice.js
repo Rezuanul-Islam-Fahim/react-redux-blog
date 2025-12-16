@@ -22,7 +22,7 @@ const postsSlice = createSlice({
   reducers: {
     postUpdated: (state, action) => {
       const { id, title, content } = action.payload
-      postsAdapter.updateOne(state, {id, changes: {title, content}})
+      postsAdapter.updateOne(state, { id, changes: { title, content } })
     },
     reactionAdded: (state, action) => {
       const { postId, emojiName } = action.payload
@@ -35,7 +35,7 @@ const postsSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(logout.fulfilled, _ => initialPosts)
+      .addCase(logout.fulfilled, () => initialState)
       .addCase(fetchPosts.pending, state => {
         state.status = 'pending'
       })

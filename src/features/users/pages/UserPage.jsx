@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux'
 import { useParams, Link } from 'react-router'
-import { fetchUserById } from '../usersSlice'
+import { selectUserById } from '../usersSlice'
 import { selectPostsByUser } from '@/features/posts'
 
 const UserPage = () => {
   const { id } = useParams()
-  const user = useSelector(state => fetchUserById(state, id))
+  const user = useSelector(state => selectUserById(state, id))
   const posts = useSelector(state => selectPostsByUser(state, id))
 
   if (!user) {

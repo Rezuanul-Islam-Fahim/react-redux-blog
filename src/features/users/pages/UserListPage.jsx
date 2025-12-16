@@ -1,9 +1,9 @@
 import { Link } from 'react-router'
 import { useSelector } from 'react-redux'
-import { fetchAllUsers } from '../usersSlice'
+import { selectAllUsers } from '../usersSlice'
 
 const UserListPage = () => {
-  const users = useSelector(fetchAllUsers)
+  const users = useSelector(selectAllUsers)
 
   return (
     <section className="text-center py-20">

@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { fetchAllUsers } from '@/features/users'
+import { selectAllUsers } from '@/features/users'
 import { login } from './authSlice'
 
 const LoginPage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const users = useSelector(fetchAllUsers)
+  const users = useSelector(selectAllUsers)
 
   const handleLogin = async e => {
     e.preventDefault()
